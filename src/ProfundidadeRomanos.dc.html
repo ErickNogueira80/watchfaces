@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Profundidade romanos</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Barlow+Condensed:wght@500;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#bbb}a:hover{color:#fff}
+</style>
+</helmet>
+<div style="width: 520px; height: 520px; background: #161618; display: flex; align-items: center; justify-content: center; font-family: 'Bebas Neue', sans-serif; color: #e8e8ea">
+<div style="width: 482px; height: 482px; border-radius: 50%; padding: 16px; box-sizing: border-box; background: linear-gradient(145deg, #4a4b50 0%, #1b1b1e 45%, #0a0a0b 100%); box-shadow: 0 30px 60px rgba(0,0,0,0.65), inset 0 1px 0 rgba(255,255,255,0.18)">
+<div style="position: relative; width: 450px; height: 450px; border-radius: 50%; overflow: hidden; background: radial-gradient(circle at 50% 28%, #3c3c41 0%, #222225 45%, #0e0e10 100%); box-shadow: inset 0 18px 30px rgba(0,0,0,0.8), inset 0 0 0 1px rgba(255,255,255,0.05)">
+
+<sc-for list="{{ticks}}" as="t" hint-placeholder-count="60">
+<div style="{{t.outer}}"><div style="{{t.inner}}"></div></div>
+</sc-for>
+
+<div style="position: absolute; left: 155px; top: 10px; width: 140px; height: 110px; display: flex; align-items: center; justify-content: center; filter: {{numFilter}}">
+<span style="font-size: 108px; letter-spacing: 1px; line-height: 1; background: linear-gradient(180deg, #2e2e33 0%, #0c0c0e 45%, #000000 100%); -webkit-background-clip: text; background-clip: text; color: transparent">XII</span>
+</div>
+<div style="position: absolute; left: 315px; top: 170px; width: 140px; height: 110px; display: flex; align-items: center; justify-content: center; filter: {{numFilter}}">
+<span style="font-size: 108px; letter-spacing: 1px; line-height: 1; background: linear-gradient(180deg, #2e2e33 0%, #0c0c0e 45%, #000000 100%); -webkit-background-clip: text; background-clip: text; color: transparent">III</span>
+</div>
+<div style="position: absolute; left: 155px; top: 330px; width: 140px; height: 110px; display: flex; align-items: center; justify-content: center; filter: {{numFilter}}">
+<span style="font-size: 108px; letter-spacing: 1px; line-height: 1; background: linear-gradient(180deg, #2e2e33 0%, #0c0c0e 45%, #000000 100%); -webkit-background-clip: text; background-clip: text; color: transparent">VI</span>
+</div>
+<div style="position: absolute; left: -5px; top: 170px; width: 140px; height: 110px; display: flex; align-items: center; justify-content: center; filter: {{numFilter}}">
+<span style="font-size: 108px; letter-spacing: 1px; line-height: 1; background: linear-gradient(180deg, #2e2e33 0%, #0c0c0e 45%, #000000 100%); -webkit-background-clip: text; background-clip: text; color: transparent">IX</span>
+</div>
+
+<div style="position: absolute; left: 112px; top: 112px; width: 226px; height: 226px; border-radius: 50%; background: {{batteryRing}}; box-shadow: 0 -1px 0 rgba(255,255,255,0.1), 0 6px 14px rgba(0,0,0,0.8)"></div>
+<div style="position: absolute; left: 120px; top: 120px; width: 210px; height: 210px; box-sizing: border-box; border-radius: 50%; background: radial-gradient(circle at 50% 30%, #333338 0%, #1c1c1f 70%); box-shadow: inset 0 12px 24px rgba(0,0,0,0.95), inset 0 -2px 4px rgba(255,255,255,0.06); display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 30px 0 26px">
+<div style="font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 20px; letter-spacing: 3px; color: #9a9aa0">{{dateLabel}}</div>
+<div style="display: flex; align-items: baseline; gap: 5px; font-family: 'Barlow Condensed', sans-serif; font-weight: 600">
+<span style="font-size: 22px; color: {{accent}}">78%</span>
+<span style="font-size: 13px; letter-spacing: 2px; color: #8a8a90">BAT</span>
+</div>
+</div>
+
+<div style="position: absolute; inset: 0; filter: drop-shadow(0 -1px 0 rgba(255,255,255,0.28)) drop-shadow(2px 8px 5px rgba(0,0,0,0.9))">
+<div style="position: absolute; left: 217px; top: 105px; width: 16px; height: 120px; transform-origin: 50% 100%; transform: rotate({{hourDeg}}deg)">
+<div style="width: 100%; height: 100%; background: linear-gradient(90deg, #3c3c41 0%, #2a2a2e 50%, #060607 50%, #000000 100%); clip-path: polygon(50% 0, 100% 14%, 100% 100%, 0 100%, 0 14%)"></div>
+</div>
+</div>
+<div style="position: absolute; inset: 0; filter: drop-shadow(0 -1px 0 rgba(255,255,255,0.28)) drop-shadow(3px 12px 6px rgba(0,0,0,0.88))">
+<div style="position: absolute; left: 219px; top: 40px; width: 12px; height: 185px; transform-origin: 50% 100%; transform: rotate({{minuteDeg}}deg)">
+<div style="width: 100%; height: 100%; background: linear-gradient(90deg, #3a3a3f 0%, #28282c 50%, #060607 50%, #000000 100%); clip-path: polygon(50% 0, 100% 8%, 100% 100%, 0 100%, 0 8%)"></div>
+</div>
+</div>
+<sc-if value="{{showSeconds}}" hint-placeholder-val="{{ true }}">
+<div style="position: absolute; inset: 0; filter: drop-shadow(5px 16px 6px rgba(0,0,0,0.75))">
+<div style="position: absolute; left: 223.5px; top: 22px; width: 3px; height: 245px; transform-origin: 50% 203px; transform: rotate({{secondDeg}}deg); background: {{accent}}; border-radius: 2px"></div>
+</div>
+</sc-if>
+<div style="position: absolute; left: 213px; top: 213px; width: 24px; height: 24px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #5c5c62 0%, #1a1a1d 45%, #000000 100%); box-shadow: 0 5px 10px rgba(0,0,0,0.9); display: flex; align-items: center; justify-content: center">
+<div style="width: 8px; height: 8px; border-radius: 50%; background: {{accent}}"></div>
+</div>
+
+</div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#ff5a1f","options":["#ff5a1f","#3ea6ff","#c6ff3d","#e8e8ea"]},"showSeconds":{"editor":"boolean","default":true},"numberEffect":{"editor":"enum","options":["relevo","contraluz"],"default":"relevo"},"liveTime":{"editor":"boolean","default":true},"$preview":{"width":520,"height":520}}'>
+class Component extends DCLogic {
+componentDidMount() {
+this.timer = setInterval(() => this.setState({ now: Date.now() }), 1000);
+}
+componentWillUnmount() {
+clearInterval(this.timer);
+}
+renderVals() {
+const accent = this.props.accent ?? '#ff5a1f';
+const live = this.props.liveTime ?? true;
+const d = live ? new Date() : new Date(2026, 9, 4, 10, 9, 30);
+const h = d.getHours() % 12, m = d.getMinutes(), s = d.getSeconds();
+const days = ['DOM', 'SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SÁB'];
+const ticks = [];
+for (let i = 0; i < 60; i++) {
+if (i % 15 === 0) continue;
+const major = i % 5 === 0;
+const w = major ? 4 : 2;
+ticks.push({
+outer: 'position:absolute;left:' + (225 - w / 2) + 'px;top:0;width:' + w + 'px;height:450px;transform:rotate(' + (i * 6) + 'deg)',
+inner: 'margin-top:8px;width:100%;height:' + (major ? 22 : 10) + 'px;border-radius:1px;background:#000000;box-shadow:0 -1px 0 rgba(255,255,255,' + (major ? '0.3' : '0.18') + '),0 ' + (major ? '4px 5px' : '2px 3px') + ' rgba(0,0,0,0.9)'
+});
+}
+return {
+accent,
+showSeconds: this.props.showSeconds ?? true,
+ticks,
+hourDeg: h * 30 + m * 0.5,
+minuteDeg: m * 6 + s * 0.1,
+secondDeg: s * 6,
+dateLabel: days[d.getDay()] + ' ' + String(d.getDate()).padStart(2, '0'),
+batteryRing: 'conic-gradient(' + accent + ' 0 78%, #1e1e21 78% 100%)',
+numFilter: (this.props.numberEffect ?? 'relevo') === 'contraluz' ? 'drop-shadow(0 -1px 0 rgba(255,255,255,0.22)) drop-shadow(0 0 16px ' + accent + '99) drop-shadow(0 10px 12px rgba(0,0,0,0.9))' : 'drop-shadow(0 -1px 0 rgba(255,255,255,0.3)) drop-shadow(0 2px 1px rgba(0,0,0,0.9)) drop-shadow(0 12px 14px rgba(0,0,0,0.95))'
+};
+}
+}
+</script>
+</body>
+</html>
