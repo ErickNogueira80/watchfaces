@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Halo prateado</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#bbb}a:hover{color:#fff}
+@keyframes rspin{to{transform:rotate(360deg)}}
+@keyframes rspinr{to{transform:rotate(-360deg)}}
+@media (prefers-reduced-motion: reduce){.ra{animation:none !important}}
+</style>
+<style>html,body{margin:0;background:#161618;overflow:hidden}</style>
+</head>
+<body>
+<template id="dc-tpl">
+
+<div style="width: 520px; height: 520px; background: #161618; display: flex; align-items: center; justify-content: center; font-family: 'Barlow', sans-serif">
+<div style="width: 482px; height: 482px; border-radius: 50%; padding: 16px; box-sizing: border-box; background: linear-gradient(145deg, #4a4b50 0%, #1b1b1e 45%, #0a0a0b 100%); box-shadow: 0 30px 60px rgba(0,0,0,0.65), inset 0 1px 0 rgba(255,255,255,0.18)">
+<div style="position: relative; width: 450px; height: 450px; border-radius: 50%; overflow: hidden; background: #000000; isolation: isolate">
+
+<sc-for list="{{rings}}" as="r" hint-placeholder-count="7">
+<div class="ra" style="{{r.orbit}}"><div style="{{r.blur}}"><div class="ra" style="{{r.ring}}"></div></div></div>
+</sc-for>
+
+<div style="position: absolute; inset: 0; background: radial-gradient(circle at 50% 50%, rgba(0,0,0,0.6) 0, rgba(0,0,0,0.3) 110px, rgba(0,0,0,0) 160px)"></div>
+<div style="position: absolute; inset: 0; background: radial-gradient(ellipse 190px 120px at 50% 50%, rgba(110,110,116,0.38) 0, rgba(50,50,54,0.22) 55%, rgba(0,0,0,0) 100%)"></div>
+
+<div style="position: absolute; left: 0; top: 0; width: 450px; height: 450px; display: flex; align-items: center; justify-content: center">
+<div style="font-family: 'Bebas Neue', sans-serif; font-size: 150px; line-height: 0.9; letter-spacing: 1px; background: linear-gradient(180deg, #cdb27a 0%, #b0935a 38%, #8e7243 70%, #6a5330 100%); -webkit-background-clip: text; background-clip: text; color: transparent; filter: drop-shadow(0 -1px 0 rgba(255,232,186,0.28)) drop-shadow(0 3px 2px rgba(0,0,0,0.95)) drop-shadow(0 10px 8px rgba(0,0,0,0.95)) drop-shadow(0 20px 14px rgba(0,0,0,0.75))">{{time}}</div>
+</div>
+
+</div>
+</div>
+</div>
+</template>
+<script type="text/x-dc" id="dc-logic" data-props='{"animate":{"editor":"boolean","default":true},"liveTime":{"editor":"boolean","default":true},"$preview":{"width":520,"height":520}}'>
+class Component extends DCLogic {
+componentDidMount() {
+this.timer = setInterval(() => this.setState({ now: Date.now() }), 1000);
+}
+componentWillUnmount() {
+clearInterval(this.timer);
+}
+renderVals() {
+const animate = this.props.animate ?? true;
+const live = this.props.liveTime ?? true;
+const d = live ? new Date() : new Date(2026, 9, 4, 13, 49, 0);
+const pad = (v) => String(v).padStart(2, '0');
+const paused = animate ? '' : ';animation-play-state:paused';
+// [raio, espessura, dx, dy, cinza, alfa do rastro, alfa da cabeça, desfoque, giro (s), sentido, órbita (s), início]
+const spec = [
+[190, 26, -18, 10, 200, 0.5, 1, 6, 7, 1, 30, 0],
+[175, 22, 20, -12, 160, 0.45, 0.95, 5, 9, -1, 26, 90],
+[205, 18, 8, 22, 230, 0.4, 0.9, 8, 11, 1, 40, 200],
+[160, 30, -10, -20, 120, 0.5, 0.85, 10, 8, -1, 34, 300],
+[185, 14, 26, 14, 255, 0.35, 1, 3, 6, 1, 22, 150],
+[150, 20, 0, 8, 180, 0.4, 0.8, 7, 12, -1, 45, 60],
+[200, 34, -24, -6, 90, 0.5, 0.7, 14, 10, 1, 50, 250]
+];
+const rings = spec.map(([R, w, dx, dy, g0, a10, a20, b, sd, dir, od, a0]) => {
+const g = Math.round(g0 * 0.5), a1 = a10 * 0.75, a2 = a20 * 0.6;
+const mask = 'radial-gradient(circle at 50% 50%, transparent 0, transparent ' + (R - w - 6) + 'px, #000 ' + (R - w) + 'px, #000 ' + (R - 4) + 'px, transparent ' + R + 'px)';
+return {
+orbit: 'position:absolute;inset:0;mix-blend-mode:screen;animation:' + (dir > 0 ? 'rspinr' : 'rspin') + ' ' + od + 's linear infinite' + paused,
+blur: 'position:absolute;inset:0;filter:blur(' + b + 'px)',
+ring: 'position:absolute;left:' + (225 + dx - R) + 'px;top:' + (225 + dy - R) + 'px;width:' + 2 * R + 'px;height:' + 2 * R + 'px;border-radius:50%;background:conic-gradient(from ' + a0 + 'deg, rgba(255,255,255,0) 0deg, rgba(' + g + ',' + g + ',' + g + ',' + a1 + ') 220deg, rgba(170,170,176,' + a2 + ') 320deg, rgba(0,0,0,0) 360deg);-webkit-mask:' + mask + ';mask:' + mask + ';animation:' + (dir > 0 ? 'rspin' : 'rspinr') + ' ' + sd + 's linear infinite' + paused
+};
+});
+return { rings, time: pad(d.getHours()) + ':' + pad(d.getMinutes()) };
+}
+}
+</script>
+<script src="../dc-mini.js"></script>
+</body>
+</html>

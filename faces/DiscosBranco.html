@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Discos à esquerda · branco</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Barlow+Condensed:wght@500;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#bbb}a:hover{color:#fff}
+</style>
+<style>html,body{margin:0;background:#161618;overflow:hidden}</style>
+</head>
+<body>
+<template id="dc-tpl">
+
+<div style="width: 520px; height: 520px; background: #161618; display: flex; align-items: center; justify-content: center; font-family: 'Barlow Condensed', sans-serif; color: #e8e8ea">
+<div style="width: 482px; height: 482px; border-radius: 50%; padding: 16px; box-sizing: border-box; background: linear-gradient(145deg, #4a4b50 0%, #1b1b1e 45%, #0a0a0b 100%); box-shadow: 0 30px 60px rgba(0,0,0,0.65), inset 0 1px 0 rgba(255,255,255,0.18)">
+<div style="position: relative; width: 450px; height: 450px; border-radius: 50%; overflow: hidden; background: {{c.dial}}">
+
+<div style="position: absolute; inset: 0; transform: rotate({{hourRot}}deg)">
+<svg viewBox="0 0 450 450" width="450" height="450" style="position: absolute; left: 0; top: 0"><path d="{{hourRing}}" style="fill: {{c.hourDisc}}; fill-rule: evenodd"></path></svg>
+<sc-for list="{{halves}}" as="l" hint-placeholder-count="12">
+<div style="{{l.style}}"><span style="font-weight: 600; font-size: 10px; letter-spacing: 1px; color: {{c.half}}">{{l.t}}</span></div>
+</sc-for>
+<sc-for list="{{hours}}" as="l" hint-placeholder-count="12">
+<div style="{{l.style}}"><span style="font-family: 'Bebas Neue', sans-serif; font-size: 54px; line-height: 1; color: {{c.num}}; text-shadow: {{c.numShadow}}">{{l.t}}</span></div>
+</sc-for>
+</div>
+
+<div style="position: absolute; inset: 0; transform: rotate({{minRot}}deg)">
+<svg viewBox="0 0 450 450" width="450" height="450" style="position: absolute; left: 0; top: 0"><path d="{{minRing}}" style="fill: {{c.minDisc}}; fill-rule: evenodd"></path><path d="{{minMinor}}" style="fill: none; stroke: {{c.minor}}; stroke-width: 1.2"></path><path d="{{minMajor}}" style="fill: none; stroke: {{c.major}}; stroke-width: 2.4"></path></svg>
+<sc-for list="{{mins}}" as="l" hint-placeholder-count="12">
+<div style="{{l.style}}"><span style="font-weight: 600; font-size: 21px; line-height: 1; color: {{c.num}}">{{l.t}}</span></div>
+</sc-for>
+</div>
+
+<div style="position: absolute; inset: 0; transform: rotate({{secRot}}deg); transition: {{secTransition}}">
+<svg viewBox="0 0 450 450" width="450" height="450" style="position: absolute; left: 0; top: 0"><circle cx="225" cy="225" r="70" style="fill: {{c.secDisc}}"></circle><path d="{{sunburst}}" style="fill: none; stroke: {{c.sun}}; stroke-width: 0.8"></path><path d="{{secTicks}}" style="fill: none; stroke: {{c.secTick}}; stroke-width: 1.2"></path></svg>
+<sc-for list="{{secNums}}" as="l" hint-placeholder-count="4">
+<div style="{{l.style}}"><span style="font-weight: 600; font-size: 11px; line-height: 1; color: {{c.secTick}}">{{l.t}}</span></div>
+</sc-for>
+</div>
+
+<svg viewBox="0 0 450 450" width="450" height="450" style="position: absolute; left: 0; top: 0; filter: {{c.plateShadow}}">
+<defs><linearGradient id="dkPlate" x1="0" y1="0" x2="1" y2="1"><stop offset="0" style="stop-color: {{c.p0}}"></stop><stop offset="0.5" style="stop-color: {{c.p1}}"></stop><stop offset="1" style="stop-color: {{c.p2}}"></stop></linearGradient></defs>
+<path d="{{plate}}" style="fill: url(#dkPlate); fill-rule: evenodd"></path>
+</svg>
+
+<div style="position: absolute; left: 215px; top: 215px; width: 20px; height: 20px; border-radius: 50%; background: radial-gradient(circle at 38% 32%, #ffffff 0%, #c4c4c8 30%, #55555a 75%, #1a1a1c 100%); box-shadow: 0 3px 6px rgba(0,0,0,0.9)"></div>
+
+<sc-for list="{{tags}}" as="l" hint-placeholder-count="3">
+<div style="{{l.style}}"><span style="font-weight: 600; font-size: 11px; letter-spacing: 2px; color: {{c.tag}}">{{l.t}}</span></div>
+</sc-for>
+
+<div style="position: absolute; left: 292px; top: 192px; width: 96px; display: flex; flex-direction: column; align-items: center; gap: 0px">
+<span style="font-weight: 600; font-size: 13px; letter-spacing: 3px; color: {{c.half}}">{{dow}}</span>
+<span style="font-family: 'Bebas Neue', sans-serif; font-size: 40px; line-height: 1; color: {{c.day}}; text-shadow: {{c.dayShadow}}">{{day}}</span>
+</div>
+
+<svg viewBox="0 0 450 450" width="450" height="450" style="position: absolute; left: 0; top: 0; filter: drop-shadow(0 2px 2px rgba(0,0,0,0.8))">
+<path d="M 4 211 L 28 225 L 4 239 Z" style="fill: {{accent}}"></path>
+<path d="M 86 225 L 94 225 M 147 225 L 155 225" style="fill: none; stroke: {{accent}}; stroke-width: 2.4"></path>
+</svg>
+
+<div style="position: absolute; inset: 0; border-radius: 50%; background: linear-gradient(125deg, rgba(255,255,255,0) 22%, rgba(255,255,255,0.07) 30%, rgba(255,255,255,0.025) 44%, rgba(255,255,255,0) 46%); pointer-events: none"></div>
+
+</div>
+</div>
+</div>
+</template>
+<script type="text/x-dc" id="dc-logic" data-props='{"accent":{"editor":"color","default":"#e3241b","options":["#e3241b","#ff5a1f","#d4af37","#e8e8ea"]},"theme":{"editor":"enum","options":["escuro","branco"],"default":"branco"},"tick":{"editor":"boolean","default":true},"liveTime":{"editor":"boolean","default":true},"$preview":{"width":520,"height":520}}'>
+class Component extends DCLogic {
+componentDidMount() {
+this.timer = setInterval(() => this.setState({ now: Date.now() }), 1000);
+}
+componentWillUnmount() {
+clearInterval(this.timer);
+}
+renderVals() {
+const accent = this.props.accent ?? '#e3241b';
+const live = this.props.liveTime ?? true;
+const d = live ? new Date() : new Date(2026, 9, 17, 10, 9, 30);
+const t = d.getHours() * 3600 + d.getMinutes() * 60 + d.getSeconds();
+const pad = (v) => String(v).padStart(2, '0');
+const days = ['DOM', 'SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SÁB'];
+
+const C = {
+escuro: { dial: '#050506', hourDisc: '#0c0c0e', minDisc: '#111113', secDisc: '#0e0e10', num: '#f2f2f4', numShadow: '0 2px 2px rgba(0,0,0,0.9)', half: '#85858b', minor: '#8a8a90', major: '#e6e6ea', sun: '#4a4a50', secTick: '#b4b4ba', p0: '#1e1e21', p1: '#0b0b0c', p2: '#030303', plateShadow: 'drop-shadow(0 -1px 0 rgba(255,255,255,0.1)) drop-shadow(0 5px 6px rgba(0,0,0,0.95))', tag: '#74747a', day: '#d8d8dc', dayShadow: '0 -1px 0 rgba(255,255,255,0.12), 0 3px 4px rgba(0,0,0,0.9)' },
+branco: { dial: '#dcdcd8', hourDisc: '#fbfbf9', minDisc: '#f5f5f3', secDisc: '#f8f8f6', num: '#151517', numShadow: '0 1px 0 rgba(255,255,255,0.9)', half: '#8e8e92', minor: '#a0a0a4', major: '#1a1a1c', sun: '#c8c8cc', secTick: '#3a3a3e', p0: '#ffffff', p1: '#f1f1ee', p2: '#dededa', plateShadow: 'drop-shadow(0 -1px 0 rgba(255,255,255,0.9)) drop-shadow(0 4px 5px rgba(0,0,0,0.28))', tag: '#9a9a9e', day: '#1c1c1e', dayShadow: '0 1px 0 rgba(255,255,255,0.9)' }
+}[this.props.theme ?? 'branco'];
+// Ângulo medido no sentido horário a partir das 12h; a janela de leitura fica no 270 (lado esquerdo)
+const P = (a, r) => ({ x: 225 + r * Math.sin(a * Math.PI / 180), y: 225 - r * Math.cos(a * Math.PI / 180) });
+const f = (v) => v.toFixed(2);
+const circ = (r) => 'M225 ' + (225 - r) + ' A' + r + ' ' + r + ' 0 1 1 225 ' + (225 + r) + ' A' + r + ' ' + r + ' 0 1 1 225 ' + (225 - r) + ' Z ';
+const seg = (a, r1, r2) => { const p = P(a, r1), q = P(a, r2); return 'M' + f(p.x) + ' ' + f(p.y) + ' L' + f(q.x) + ' ' + f(q.y) + ' '; };
+const sector = (a0, a1, r1, r2) => {
+const o0 = P(a0, r2), o1 = P(a1, r2), i1 = P(a1, r1), i0 = P(a0, r1);
+return 'M' + f(o0.x) + ' ' + f(o0.y) + ' A' + r2 + ' ' + r2 + ' 0 0 1 ' + f(o1.x) + ' ' + f(o1.y) + ' L' + f(i1.x) + ' ' + f(i1.y) + ' A' + r1 + ' ' + r1 + ' 0 0 0 ' + f(i0.x) + ' ' + f(i0.y) + ' Z ';
+};
+// Rótulo preso ao disco, de pé quando passa pela janela
+const lab = (a, r, w, h) => { const p = P(a, r); return 'position:absolute;left:' + f(p.x - w / 2) + 'px;top:' + f(p.y - h / 2) + 'px;width:' + w + 'px;height:' + h + 'px;display:flex;align-items:center;justify-content:center;transform:rotate(' + (a - 270) + 'deg)'; };
+
+const hours = [], halves = [], mins = [];
+for (let n = 1; n <= 12; n++) {
+hours.push({ style: lab(n * 30, 168, 70, 58), t: String(n) });
+halves.push({ style: lab(n * 30 + 15, 170, 50, 18), t: n + ':30' });
+}
+for (let k = 0; k < 12; k++) mins.push({ style: lab(k * 30, 106, 40, 24), t: pad(k * 5) });
+let minMinor = '', minMajor = '', secTicks = '', sunburst = '';
+for (let i = 0; i < 60; i++) {
+if (i % 5) minMinor += seg(i * 6, 121, 127); else minMajor += seg(i * 6, 118, 128);
+secTicks += seg(i * 6, 58, i % 5 ? 63 : 67);
+}
+for (let i = 0; i < 90; i++) sunburst += seg(i * 4, 15, 38);
+const secNums = [0, 15, 30, 45].map((s) => ({ style: lab(s * 6, 47, 24, 14), t: pad(s) }));
+
+const tags = [
+{ style: lab(220, 168, 60, 16), t: 'HORA' },
+{ style: lab(226, 110, 40, 16), t: 'MIN' },
+{ style: 'position:absolute;left:205px;top:300px;width:40px;height:16px;display:flex;align-items:center;justify-content:center', t: 'SEG' }
+];
+
+return {
+c: C,
+accent,
+hourRing: circ(196) + circ(140),
+minRing: circ(130) + circ(90),
+minMinor, minMajor, secTicks, sunburst,
+plate: circ(225) + sector(228, 312, 140, 196) + sector(234, 306, 90, 130) + circ(70),
+hours, halves, mins, secNums, tags,
+hourRot: f(270 - ((t / 3600) % 12) * 30),
+minRot: f(270 - ((t / 60) % 60) * 6),
+secRot: 270 - t * 6,
+secTransition: (this.props.tick ?? true) ? 'transform 0.35s cubic-bezier(0.4, 1.6, 0.6, 1)' : 'none',
+dow: days[d.getDay()],
+day: pad(d.getDate())
+};
+}
+}
+</script>
+<script src="../dc-mini.js"></script>
+</body>
+</html>

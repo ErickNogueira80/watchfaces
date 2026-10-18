@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Ponteiros que iluminam · cromado</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Barlow+Condensed:wght@600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#bbb}a:hover{color:#fff}
+</style>
+</helmet>
+<div style="width: 520px; height: 520px; background: #161618; display: flex; align-items: center; justify-content: center; font-family: 'Bebas Neue', sans-serif; color: #e8e8ea">
+<div style="width: 482px; height: 482px; border-radius: 50%; padding: 16px; box-sizing: border-box; background: linear-gradient(145deg, #4a4b50 0%, #1b1b1e 45%, #0a0a0b 100%); box-shadow: 0 30px 60px rgba(0,0,0,0.65), inset 0 1px 0 rgba(255,255,255,0.18)">
+<div style="{{dial}}">
+
+<svg viewBox="0 0 450 450" width="450" height="450" style="position: absolute; left: 0; top: 0">
+<circle cx="225" cy="225" r="104" style="fill: none; stroke: {{ring}}; stroke-width: 1"></circle>
+<circle cx="225" cy="225" r="190" style="fill: none; stroke: {{ring}}; stroke-width: 1"></circle>
+<circle cx="225" cy="225" r="34" style="fill: none; stroke: {{ring}}; stroke-width: 1"></circle>
+</svg>
+
+<div style="position: absolute; inset: 0; color: {{dim}}">
+<sc-for list="{{minNums}}" as="n" hint-placeholder-count="60">
+<div style="{{n.style}}"><span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 12px; line-height: 1">{{n.t}}</span></div>
+</sc-for>
+<sc-for list="{{hourNums}}" as="n" hint-placeholder-count="12">
+<div style="{{n.style}}"><span style="font-size: 58px; line-height: 1">{{n.t}}</span></div>
+</sc-for>
+</div>
+
+<div style="{{hourWash}}"><div style="{{hourTex}}"></div></div>
+<div style="{{minWash}}"><div style="{{minTex}}"></div></div>
+
+<div style="{{hourLit}}">
+<sc-for list="{{hourNums}}" as="n" hint-placeholder-count="12">
+<div style="{{n.style}}"><span style="font-size: 58px; line-height: 1; text-shadow: {{glow}}">{{n.t}}</span></div>
+</sc-for>
+</div>
+<div style="{{minLit}}">
+<sc-for list="{{minNums}}" as="n" hint-placeholder-count="60">
+<div style="{{n.style}}"><span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 12px; line-height: 1; text-shadow: {{glowSmall}}">{{n.t}}</span></div>
+</sc-for>
+</div>
+
+<sc-if value="{{dots}}" hint-placeholder-val="{{ true }}">
+<div style="position: absolute; inset: 0; transform: rotate({{hourDeg}}deg)">
+<div style="position: absolute; left: 221px; top: 113px; width: 8px; height: 8px; border-radius: 50%; background: {{mark}}; box-shadow: {{lume}}"></div>
+</div>
+<div style="position: absolute; inset: 0; transform: rotate({{minuteDeg}}deg)">
+<div style="position: absolute; left: 222px; top: 37px; width: 6px; height: 6px; border-radius: 50%; background: {{mark}}; box-shadow: {{lume}}"></div>
+</div>
+</sc-if>
+<sc-if value="{{hands}}" hint-placeholder-val="{{ false }}">
+<div style="position: absolute; left: 220px; top: 110px; width: 10px; height: 135px; transform-origin: 50% 115px; transform: rotate({{hourDeg}}deg); border-radius: 5px; background: {{handBody}}">
+<div style="position: absolute; left: 2.5px; top: 4px; width: 5px; height: 14px; border-radius: 3px; background: {{mark}}; box-shadow: {{lume}}"></div>
+</div>
+<div style="position: absolute; left: 221px; top: 45px; width: 8px; height: 200px; transform-origin: 50% 180px; transform: rotate({{minuteDeg}}deg); border-radius: 4px; background: {{handBody}}">
+<div style="position: absolute; left: 2px; top: 4px; width: 4px; height: 14px; border-radius: 2px; background: {{mark}}; box-shadow: {{lume}}"></div>
+</div>
+</sc-if>
+<sc-if value="{{showSeconds}}" hint-placeholder-val="{{ true }}">
+<div style="position: absolute; inset: 0; transform: rotate({{secondDeg}}deg)">
+<div style="position: absolute; left: 223px; top: 189px; width: 4px; height: 4px; border-radius: 50%; background: {{secColor}}"></div>
+</div>
+</sc-if>
+<div style="position: absolute; left: 221px; top: 221px; width: 8px; height: 8px; border-radius: 50%; background: {{pin}}"></div>
+
+</div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["escuro","cromado","branco"],"default":"cromado"},"light":{"editor":"color","default":"#f2f2f2","options":["#f2f2f2","#ffe2b0","#cfe6ff","#ff8a3d"]},"style":{"editor":"enum","options":["pontos","ponteiros"],"default":"pontos"},"trail":{"editor":"enum","options":["curto","longo"],"default":"curto"},"showSeconds":{"editor":"boolean","default":true},"liveTime":{"editor":"boolean","default":true},"$preview":{"width":520,"height":520}}'>
+class Component extends DCLogic {
+componentDidMount() {
+this.timer = setInterval(() => this.setState({ now: Date.now() }), 1000);
+}
+componentWillUnmount() {
+clearInterval(this.timer);
+}
+renderVals() {
+const theme = this.props.theme ?? 'cromado';
+const light = this.props.light ?? '#f2f2f2';
+const long = (this.props.trail ?? 'curto') === 'longo';
+const dots = (this.props.style ?? 'pontos') === 'pontos';
+const live = this.props.liveTime ?? true;
+const d = live ? new Date() : new Date(2026, 9, 17, 9, 4, 30);
+const h = d.getHours(), m = d.getMinutes(), s = d.getSeconds();
+const pad = (v) => String(v).padStart(2, '0');
+const rgb = (hex) => { const v = parseInt(hex.slice(1), 16); return [(v >> 16) & 255, (v >> 8) & 255, v & 255].join(','); };
+const L = rgb(light);
+
+const P = (a, r) => ({ x: 225 + r * Math.sin(a * Math.PI / 180), y: 225 - r * Math.cos(a * Math.PI / 180) });
+const at = (a, r, w, hh) => { const p = P(a, r); return 'position:absolute;left:' + (p.x - w / 2).toFixed(2) + 'px;top:' + (p.y - hh / 2).toFixed(2) + 'px;width:' + w + 'px;height:' + hh + 'px;display:flex;align-items:center;justify-content:center'; };
+const hourNums = [];
+for (let n = 1; n <= 12; n++) hourNums.push({ t: String(n), style: at(n * 30, 148, 70, 60) });
+const minNums = [];
+for (let i = 0; i < 60; i++) minNums.push({ t: pad(i), style: at(i * 6, 206, 24, 16) });
+
+const hourDeg = (h % 12 + m / 60) * 30;
+const minuteDeg = (m + s / 60) * 6;
+// Facho que segue o ponteiro: o número atual aceso, os vizinhos fracos (~1/3) e nada além.
+// side = ângulo do vizinho; o rastro (atrás) vai mais longe que a frente.
+const beam = (deg, core, side, behindEnd, aheadEnd) => {
+const a0 = deg - behindEnd, stop = (v) => (behindEnd + v).toFixed(2) + 'deg';
+const g = 'conic-gradient(from ' + a0.toFixed(2) + 'deg at 50% 50%, rgba(0,0,0,0) 0deg, rgba(0,0,0,0.32) ' + stop(-side) + ', #000 ' + stop(-core) + ', #000 ' + stop(core) + ', rgba(0,0,0,0.3) ' + stop(side) + ', rgba(0,0,0,0) ' + stop(aheadEnd) + ', rgba(0,0,0,0) 360deg)';
+return '-webkit-mask-image:' + g + ';mask-image:' + g;
+};
+const hb = beam(hourDeg, 4, 30, long ? 90 : 64, 40);
+const mb = beam(minuteDeg, 1.5, 6, long ? 34 : 20, 10);
+const layer = 'position:absolute;inset:0;';
+const band = (r1, r2) => { const g = 'radial-gradient(circle at 50% 50%, rgba(0,0,0,0) ' + r1 + 'px, #000 ' + (r1 + 10) + 'px, #000 ' + (r2 - 10) + 'px, rgba(0,0,0,0) ' + r2 + 'px)'; return '-webkit-mask-image:' + g + ';mask-image:' + g; };
+const dial = 'position:relative;width:450px;height:450px;border-radius:50%;overflow:hidden;';
+
+// Temas: no escuro a luz acende os números; no cromado e no branco ela os revela em preto
+const T = {
+escuro: {
+dial: dial + 'background:#020202', ring: '#0e0e0f', dim: '#070708', lit: light,
+texDot: 'rgba(' + L + ',0.16)', sheen: 'none',
+glow: '0 0 8px rgba(' + L + ',0.35)', glowSmall: '0 0 5px rgba(' + L + ',0.5)',
+mark: light, lume: '0 0 5px rgba(' + L + ',0.7)', handBody: '#0d0d0e', secColor: '#6a6a70',
+pin: 'radial-gradient(circle at 38% 32%, #e0e0e4 0%, #6a6a70 70%)'
+},
+cromado: {
+dial: dial + 'background:radial-gradient(circle at 35% 25%, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0) 55%), repeating-conic-gradient(from 0deg at 50% 50%, rgba(255,255,255,0.07) 0deg 0.6deg, rgba(0,0,0,0.06) 0.6deg 1.2deg), conic-gradient(from 25deg at 50% 50%, #d6d6da, #8c8c92, #e4e4e8, #77777d, #cfcfd3, #88888e, #e0e0e4, #7c7c82, #d6d6da)',
+ring: 'rgba(0,0,0,0.14)', dim: 'rgba(0,0,0,0.07)', lit: '#0c0c0e',
+texDot: 'rgba(0,0,0,0.22)', sheen: 'radial-gradient(circle at 50% 50%, rgba(255,255,255,0) 100px, rgba(255,255,255,0.45) 150px, rgba(255,255,255,0) 200px)',
+glow: '0 1px 0 rgba(255,255,255,0.55)', glowSmall: '0 1px 0 rgba(255,255,255,0.5)',
+mark: '#0c0c0e', lume: '0 1px 0 rgba(255,255,255,0.6), 0 2px 3px rgba(0,0,0,0.4)', handBody: 'rgba(0,0,0,0.25)', secColor: '#3a3a3e',
+pin: 'radial-gradient(circle at 38% 32%, #ffffff 0%, #8a8a90 60%, #3a3a3e 100%)'
+},
+branco: {
+dial: dial + 'background:radial-gradient(circle at 45% 35%, #ffffff 0%, #f3f3f1 60%, #e6e6e3 100%)',
+ring: '#e4e4e0', dim: 'rgba(0,0,0,0.045)', lit: '#111113',
+texDot: 'rgba(0,0,0,0.14)', sheen: 'none',
+glow: 'none', glowSmall: 'none',
+mark: '#111113', lume: 'none', handBody: 'rgba(0,0,0,0.12)', secColor: '#a0a0a4',
+pin: 'radial-gradient(circle at 38% 32%, #6a6a70 0%, #111113 70%)'
+}
+}[theme];
+const tex = 'position:absolute;inset:0;background-image:radial-gradient(circle, ' + T.texDot + ' 0.7px, rgba(0,0,0,0) 1.3px);background-size:4px 4px;';
+const sheen = T.sheen === 'none' ? '' : 'background:' + T.sheen + ';';
+return {
+dial: T.dial, ring: T.ring, dim: T.dim, mark: T.mark, lume: T.lume, handBody: T.handBody, secColor: T.secColor, pin: T.pin,
+dots, hands: !dots,
+hourLit: layer + 'color:' + T.lit + ';' + hb,
+minLit: layer + 'color:' + T.lit + ';' + mb,
+hourWash: layer + sheen + hb,
+minWash: layer + mb,
+hourTex: tex + band(104, 190),
+minTex: tex + band(190, 225),
+glow: T.glow, glowSmall: T.glowSmall,
+hourNums, minNums,
+hourDeg: hourDeg.toFixed(2),
+minuteDeg: minuteDeg.toFixed(2),
+secondDeg: s * 6,
+showSeconds: this.props.showSeconds ?? true
+};
+}
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mostradores · Galaxy Watch4</title>
+<meta name="description" content="Mostradores criados por Erick Nogueira para o Galaxy Watch4, animados e com a hora real.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Barlow+Condensed:wght@500;600&amp;display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0d0d0f;--surface:#161618;--line:#232327;--text:#ececef;--muted:#8d8d94;--accent:#b6f03c}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--text);font-family:'Barlow Condensed',system-ui,sans-serif}
+a{color:var(--text)}
+.wrap{max-width:1240px;margin:0 auto;padding:56px 24px 72px}
+header h1{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:clamp(56px,9vw,104px);line-height:.9;letter-spacing:1px;margin:0}
+header p{margin:14px 0 0;font-size:20px;color:var(--muted);max-width:640px;line-height:1.35}
+section{margin-top:64px}
+h2{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:38px;letter-spacing:1px;margin:0 0 20px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:28px}
+.card{margin:0}
+.frame{position:relative;width:100%;aspect-ratio:1;overflow:hidden;border-radius:18px;background:var(--surface)}
+.frame iframe{position:absolute;left:0;top:0;width:520px;height:520px;border:0;transform-origin:0 0;transform:scale(var(--s,0.5))}
+figcaption{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;padding:12px 2px 0}
+.code{font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--muted)}
+.name{font-size:19px;font-weight:600}
+.tags{display:flex;flex-wrap:wrap;gap:6px;width:100%}
+.tag{font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;padding:3px 9px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
+.tag.on{border-color:var(--accent);color:var(--accent)}
+footer{margin-top:72px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:16px}
+@media (max-width:600px){.wrap{padding:36px 16px 56px}section{margin-top:44px}.grid{gap:22px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Mostradores</h1>
+    <p>Criações para o Galaxy Watch4, todas animadas e com a hora real. Os marcados como “no relógio” já estão instalados no pulso.</p>
+  </header>
+  <section>
+    <h2>Clássicos</h2>
+    <div class="grid">
+      <figure class="card">
+        <div class="frame"><iframe src="faces/Main.html" title="A · Profundidade" loading="lazy" scrolling="no"></iframe></div>
+        <figcaption><span class="code">A</span><span class="name">Profundidade</span></figcaption>
+      </figure>
+      <figure class="card">
+        <div class="frame"><iframe src="faces/Camadas.html" title="B · Camadas de vidro" loading="lazy" scrolling="no"></iframe></div>
+        <figcaption><span class="code">B</span><span class="name">Camadas de vidro</span></figcaption>
+      </figure>
+      <figure class="card">
+        <div class="frame"><iframe src="faces/AOD.html" title="AOD · Sempre ligado" loading="lazy" scrolling="no"></iframe></div>
+        <figcaption><span class="code">AOD</span><span class="name">Sempre ligado</span></figcaption>
+      </figure>
+      <figure class="card">
+        <div class="frame"><iframe src="faces/ProfundidadePreto.html" title="A2 · Profundidade · números pretos" loading="lazy" scrolling="no"></iframe></div>
+        <figcaption><span class="code">A2</span><span class="name">Profundidade · números pretos</span></figcaption>
+      </figure>
+      <figure class="card">
+        <div class="frame"><iframe src="faces/CamadasPreto.html" title="B2 · Camadas · números pretos" loading="lazy" scrolling="no"></iframe></div>
+        <figcaption><span class="code">B2</span><span class="name">Camadas · números pretos</span></figcaption>
+      </figure>
+      <figure class="card">
+        <div class="frame"><iframe src="faces/ProfundidadeDourado.html" title="A3 · Profundidade · preto total" loading="lazy" scrolling="no"></iframe></div>
+        <figcaption><span class="code">A3</span><span class="name">Profundidade · preto total</span><span class="tags"><span class="tag on">No relógio · Profundidade</span></span></figcaption>
+      </figure>
+      <figure class="card">
+        <div class="frame"><iframe src="faces/CamadasDourado.html" title="B3 · Camadas · preto total" loading="lazy" scrolling="no"></iframe></div>
+        <figcaption><span class="code">B3</span><span class="name">Camadas · preto total</span></figcaption>
+      </figure>
+      <figure class="card">
+        <div class="frame"><iframe src="faces/ProfundidadeEscuro.html" title="A4 · Profundidade · fundo escuro (no relógio)" loading="lazy" scrolling="no"></iframe></div>
+        <figcaption><span class="code">A4</span><span class="name">Profundidade · fundo escuro</span></figcaption>
+      </figure>
+    </div>
+  </section>
+  <section>
+    <h2>Engrenagens aparentes</h2>
+    <div class="grid">
+      <figure class="card">
+        <div class="frame"><iframe src="faces/Esqueleto.html" title="C1 · Esqueleto clássico" loading="lazy" scrolling="no"></iframe></div>
+        <figcaption><span class="code">C1</span><span class="name">Esqueleto clássico</span></figcaption>
+      </figure>
+      <figure class="card">
+        <div class="frame"><iframe src="faces/Turbilhao.html" title="C2 · Turbilhão" loading="lazy" scrolling="no"></iframe></div>
+        <figcaption><span class="code">C2</span><span class="name">Turbilhão</span></figcaption>
+      </figure>
+      <figure class="card">
+        <div class="frame"><iframe src="faces/EsqueletoTotal.html" title="C3 · Esqueleto total" loading="lazy" scrolling="no"></iframe></div>
+        <figcaption><span class="code">C3</span><span class="name">Esqueleto total</span></figcaption>
+      </figure>
+    </div>
+  </section>
+  <section>
+    <h2>Esqueleto ousado</h2>
+    <div class="grid">
+      <figure class="card">
+        <div class="frame"><iframe src="faces/Ousado.html" title="C4 · Ousado · teia (mais escuro)" loading="lazy" scrolling="no"></iframe></div>
+        <figcaption><span class="code">C4</span><span class="name">Ousado · teia (mais escuro)</span></figcaption>
+      </figure>
+      <figure class="card">
+        <div class="frame"><iframe src="faces/OusadoX.html" title="C5 · Ousado · armação em X" loading="lazy" scrolling="no"></iframe></div>
+        <figcaption><span class="code">C5</span><span class="name">Ousado · armação em X</span></figcaption>
+      </figure>
+      <figure class="card">
+        <div class="frame"><iframe src="faces/OusadoNumeros.html" title="C6 · Ousado · números grandes" loading="lazy" scrolling="no"></iframe></div>
+        <figcaption><span class="code">C6</span><span class="name">Ousado · números grandes</span></figcaption>
+      </figure>
+      <figure class="card">
+        <div class="frame"><iframe src="faces/OusadoInfinito.html" title="C7 · X + números · infinito (no relógio)" loading="lazy" scrolling="no"></iframe></div>
+        <figcaption><span class="code">C7</span><span class="name">X + números · infinito</span><span class="tags"><span class="tag on">No relógio · Engrenagens</span></span></figcaption>
+      </figure>
+    </div>
+  </section>
+  <section>
+    <h2>Anéis de luz</h2>
+    <div class="grid">
+      <figure class="card">
+        <div class="frame"><iframe src="faces/AneisPrata.html" title="D1 · Halo prateado" loading="lazy" scrolling="no"></iframe></div>
+        <figcaption><span class="code">D1</span><span class="name">Halo prateado</span><span class="tags"><span class="tag on">No relógio · Halo</span></span></figcaption>
+      </figure>
+      <figure class="card">
+        <div class="frame"><iframe src="faces/AneisFumaca.html" title="D2 · Fumaça grafite" loading="lazy" scrolling="no"></iframe></div>
+        <figcaption><span class="code">D2</span><span class="name">Fumaça grafite</span><span class="tags"><span class="tag on">No relógio · Fumaça</span></span></figcaption>
+      </figure>
+      <figure class="card">
+        <div class="frame"><iframe src="faces/AneisTunel.html" title="D3 · Túnel cromado" loading="lazy" scrolling="no"></iframe></div>
+        <figcaption><span class="code">D3</span><span class="name">Túnel cromado</span><span class="tags"><span class="tag on">No relógio · Túnel</span></span></figcaption>
+      </figure>
+    </div>
+  </section>
+  <section>
+    <h2>Discos giratórios</h2>
+    <div class="grid">
+      <figure class="card">
+        <div class="frame"><iframe src="faces/Discos.html" title="E1 · Discos · leitura à esquerda" loading="lazy" scrolling="no"></iframe></div>
+        <figcaption><span class="code">E1</span><span class="name">Discos · leitura à esquerda</span></figcaption>
+      </figure>
+      <figure class="card">
+        <div class="frame"><iframe src="faces/DiscosBranco.html" title="E2 · Discos · branco" loading="lazy" scrolling="no"></iframe></div>
+        <figcaption><span class="code">E2</span><span class="name">Discos · branco</span></figcaption>
+      </figure>
+    </div>
+  </section>
+  <section>
+    <h2>Esferas magnéticas</h2>
+    <div class="grid">
+      <figure class="card">
+        <div class="frame"><iframe src="faces/Esferas.html" title="F1 · Esferas magnéticas · hora no centro" loading="lazy" scrolling="no"></iframe></div>
+        <figcaption><span class="code">F1</span><span class="name">Esferas magnéticas · hora no centro</span></figcaption>
+      </figure>
+    </div>
+  </section>
+  <section>
+    <h2>Luz dos ponteiros</h2>
+    <div class="grid">
+      <figure class="card">
+        <div class="frame"><iframe src="faces/Lanterna.html" title="G1 · Apagado · ponteiros que iluminam" loading="lazy" scrolling="no"></iframe></div>
+        <figcaption><span class="code">G1</span><span class="name">Apagado · ponteiros que iluminam</span></figcaption>
+      </figure>
+      <figure class="card">
+        <div class="frame"><iframe src="faces/LanternaCromado.html" title="G2 · Ponteiros que iluminam · cromado" loading="lazy" scrolling="no"></iframe></div>
+        <figcaption><span class="code">G2</span><span class="name">Ponteiros que iluminam · cromado</span></figcaption>
+      </figure>
+      <figure class="card">
+        <div class="frame"><iframe src="faces/LanternaBranco.html" title="G3 · Ponteiros que iluminam · branco" loading="lazy" scrolling="no"></iframe></div>
+        <figcaption><span class="code">G3</span><span class="name">Ponteiros que iluminam · branco</span></figcaption>
+      </figure>
+    </div>
+  </section>
+  <section>
+    <h2>Exercício</h2>
+    <div class="grid">
+      <figure class="card">
+        <div class="frame"><iframe src="faces/Treino.html" title="H1 · Treino · cardio, calorias e cronômetro" loading="lazy" scrolling="no"></iframe></div>
+        <figcaption><span class="code">H1</span><span class="name">Treino · cardio, calorias e cronômetro</span><span class="tags"><span class="tag on">No relógio · Treino</span><span class="tag">Interativo</span></span></figcaption>
+      </figure>
+    </div>
+  </section>
+  <footer>Erick Nogueira · Galaxy Watch4 (450×450)</footer>
+</div>
+<script>
+// Cada mostrador é desenhado em 520×520 e reduzido para caber no cartão
+var ro = new ResizeObserver(function (es) { es.forEach(function (e) { e.target.style.setProperty('--s', e.contentRect.width / 520); }); });
+document.querySelectorAll('.frame').forEach(function (f) { ro.observe(f); });
+</script>
+</body>
+</html>

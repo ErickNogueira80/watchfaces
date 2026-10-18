@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Esqueleto clássico</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#bbb}a:hover{color:#fff}
+@keyframes wfspin{to{transform:rotate(360deg)}}
+@keyframes wfspinr{to{transform:rotate(-360deg)}}
+@keyframes wfbal{0%,100%{transform:rotate(-150deg)}50%{transform:rotate(150deg)}}
+.wf path{fill:url(#wfSteel);stroke:rgba(255,255,255,0.22);stroke-width:0.6;fill-rule:evenodd}
+.wf.dark path{fill:url(#wfDark);stroke:rgba(255,255,255,0.08)}
+.wf.acc path{fill:url(#wfAcc);stroke:rgba(255,255,255,0.3)}
+.wf path.hair{fill:none;stroke:#c4c4c8;stroke-width:0.7}
+.wf.dark path.hair{fill:none;stroke:#55555a}
+@media (prefers-reduced-motion: reduce){.wf-anim{animation:none !important}}
+</style>
+</helmet>
+<div style="width: 520px; height: 520px; background: #161618; display: flex; align-items: center; justify-content: center; font-family: 'Bebas Neue', sans-serif">
+<div style="width: 482px; height: 482px; border-radius: 50%; padding: 16px; box-sizing: border-box; background: linear-gradient(145deg, #4a4b50 0%, #1b1b1e 45%, #0a0a0b 100%); box-shadow: 0 30px 60px rgba(0,0,0,0.65), inset 0 1px 0 rgba(255,255,255,0.18)">
+<div style="position: relative; width: 450px; height: 450px; border-radius: 50%; overflow: hidden; background: #000000">
+
+<svg width="0" height="0" style="position: absolute">
+<defs>
+<radialGradient id="wfSteel"><stop offset="0" style="stop-color: #d0d0d5"></stop><stop offset="0.55" style="stop-color: #8a8a90"></stop><stop offset="1" style="stop-color: #46464c"></stop></radialGradient>
+<radialGradient id="wfDark"><stop offset="0" style="stop-color: #5c5c62"></stop><stop offset="0.6" style="stop-color: #2c2c30"></stop><stop offset="1" style="stop-color: #141416"></stop></radialGradient>
+<radialGradient id="wfAcc"><stop offset="0" style="stop-color: #ffe2cf"></stop><stop offset="0.5" style="stop-color: {{accent}}"></stop><stop offset="1" style="stop-color: #3a1204"></stop></radialGradient>
+</defs>
+</svg>
+
+<div style="position: absolute; inset: 0; background-color: #0c0c0d; background-image: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.06) 0, rgba(255,255,255,0.06) 4px, rgba(0,0,0,0) 8px); background-size: 14px 14px"></div>
+<div style="position: absolute; inset: 0; background: radial-gradient(circle at 50% 50%, rgba(0,0,0,0) 30%, rgba(0,0,0,0.85) 75%)"></div>
+
+<sc-for list="{{wheels}}" as="g" hint-placeholder-count="8">
+<div style="{{g.outer}}"><div class="wf-anim" style="{{g.anim}}"><div style="{{g.phase}}"><svg class="{{g.cls}}" viewBox="{{g.vb}}" width="100%" height="100%"><path d="{{g.d}}"></path><path class="hair" d="{{g.d2}}"></path></svg></div></div></div>
+</sc-for>
+
+<sc-for list="{{bridges}}" as="b" hint-placeholder-count="6">
+<div style="{{b.style}}"></div>
+</sc-for>
+<sc-for list="{{jewels}}" as="j" hint-placeholder-count="6">
+<div style="{{j.style}}"></div>
+</sc-for>
+
+<div style="position: absolute; inset: 0; border-radius: 50%; background: radial-gradient(circle at 50% 30%, #1d1d20 0%, #0b0b0c 55%, #000000 100%); -webkit-mask: radial-gradient(circle at 50% 50%, transparent 0, transparent 150px, #000 150.5px); mask: radial-gradient(circle at 50% 50%, transparent 0, transparent 150px, #000 150.5px)"></div>
+<div style="position: absolute; left: 75px; top: 75px; width: 300px; height: 300px; border-radius: 50%; box-shadow: inset 0 0 26px 10px rgba(0,0,0,0.9)"></div>
+<div style="position: absolute; left: 72px; top: 72px; width: 306px; height: 306px; box-sizing: border-box; border-radius: 50%; border: 3px solid #2a2a2e; box-shadow: inset 0 1px 0 rgba(255,255,255,0.14), 0 -1px 0 rgba(255,255,255,0.1)"></div>
+
+<sc-for list="{{ticks}}" as="t" hint-placeholder-count="56">
+<div style="{{t.outer}}"><div style="{{t.inner}}"></div></div>
+</sc-for>
+
+<div style="position: absolute; left: 175px; top: -3px; width: 100px; height: 80px; display: flex; align-items: center; justify-content: center; filter: drop-shadow(0 -1px 0 rgba(255,255,255,0.42)) drop-shadow(0 3px 2px rgba(0,0,0,1)) drop-shadow(0 12px 14px rgba(0,0,0,1))">
+<span style="font-size: 70px; line-height: 1; background: linear-gradient(180deg, #3a3a40 0%, #151517 45%, #050505 100%); -webkit-background-clip: text; background-clip: text; color: transparent">12</span>
+</div>
+<div style="position: absolute; left: 363px; top: 185px; width: 100px; height: 80px; display: flex; align-items: center; justify-content: center; filter: drop-shadow(0 -1px 0 rgba(255,255,255,0.42)) drop-shadow(0 3px 2px rgba(0,0,0,1)) drop-shadow(0 12px 14px rgba(0,0,0,1))">
+<span style="font-size: 70px; line-height: 1; background: linear-gradient(180deg, #3a3a40 0%, #151517 45%, #050505 100%); -webkit-background-clip: text; background-clip: text; color: transparent">3</span>
+</div>
+<div style="position: absolute; left: 175px; top: 373px; width: 100px; height: 80px; display: flex; align-items: center; justify-content: center; filter: drop-shadow(0 -1px 0 rgba(255,255,255,0.42)) drop-shadow(0 3px 2px rgba(0,0,0,1)) drop-shadow(0 12px 14px rgba(0,0,0,1))">
+<span style="font-size: 70px; line-height: 1; background: linear-gradient(180deg, #3a3a40 0%, #151517 45%, #050505 100%); -webkit-background-clip: text; background-clip: text; color: transparent">6</span>
+</div>
+<div style="position: absolute; left: -13px; top: 185px; width: 100px; height: 80px; display: flex; align-items: center; justify-content: center; filter: drop-shadow(0 -1px 0 rgba(255,255,255,0.42)) drop-shadow(0 3px 2px rgba(0,0,0,1)) drop-shadow(0 12px 14px rgba(0,0,0,1))">
+<span style="font-size: 70px; line-height: 1; background: linear-gradient(180deg, #3a3a40 0%, #151517 45%, #050505 100%); -webkit-background-clip: text; background-clip: text; color: transparent">9</span>
+</div>
+
+<div style="position: absolute; inset: 0; filter: drop-shadow(2px 9px 5px rgba(0,0,0,0.9))">
+<div style="position: absolute; left: 217px; top: 110px; width: 16px; height: 115px; transform-origin: 50% 100%; transform: rotate({{hourDeg}}deg)">
+<div style="width: 100%; height: 100%; background: linear-gradient(90deg, #ffffff 0%, #ffffff 50%, #9d9da3 50%, #9d9da3 100%); clip-path: polygon(50% 0, 100% 14%, 100% 100%, 0 100%, 0 14%)"></div>
+</div>
+</div>
+<div style="position: absolute; inset: 0; filter: drop-shadow(3px 13px 6px rgba(0,0,0,0.85))">
+<div style="position: absolute; left: 219px; top: 45px; width: 12px; height: 180px; transform-origin: 50% 100%; transform: rotate({{minuteDeg}}deg)">
+<div style="width: 100%; height: 100%; background: linear-gradient(90deg, #f4f4f6 0%, #f4f4f6 50%, #8c8c92 50%, #8c8c92 100%); clip-path: polygon(50% 0, 100% 8%, 100% 100%, 0 100%, 0 8%)"></div>
+</div>
+</div>
+<div style="position: absolute; inset: 0; filter: drop-shadow(5px 18px 6px rgba(0,0,0,0.8))">
+<div style="position: absolute; left: 223.5px; top: 30px; width: 3px; height: 230px; transform-origin: 50% 195px; transform: rotate({{secondDeg}}deg); background: {{accent}}; border-radius: 2px"></div>
+</div>
+<div style="position: absolute; left: 213px; top: 213px; width: 24px; height: 24px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #ffffff 0%, #8d8d92 45%, #26262a 100%); box-shadow: 0 5px 10px rgba(0,0,0,0.9); display: flex; align-items: center; justify-content: center">
+<div style="width: 8px; height: 8px; border-radius: 50%; background: {{accent}}"></div>
+</div>
+
+</div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#ff5a1f","options":["#ff5a1f","#d4af37","#3ea6ff","#e8e8ea"]},"animate":{"editor":"boolean","default":true},"liveTime":{"editor":"boolean","default":true},"$preview":{"width":520,"height":520}}'>
+class Component extends DCLogic {
+componentDidMount() {
+this.timer = setInterval(() => this.setState({ now: Date.now() }), 1000);
+}
+componentWillUnmount() {
+clearInterval(this.timer);
+}
+renderVals() {
+const accent = this.props.accent ?? '#ff5a1f';
+const animate = this.props.animate ?? true;
+const live = this.props.liveTime ?? true;
+const d = live ? new Date() : new Date(2026, 9, 4, 10, 9, 30);
+const h = d.getHours() % 12, m = d.getMinutes(), s = d.getSeconds();
+
+const TAU = Math.PI * 2;
+const pt = (a, r) => (r * Math.sin(a)).toFixed(2) + ' ' + (-r * Math.cos(a)).toFixed(2);
+const circ = (r) => 'M' + pt(0, r) + ' A' + r + ' ' + r + ' 0 1 1 ' + pt(Math.PI, r) + ' A' + r + ' ' + r + ' 0 1 1 ' + pt(0, r) + ' Z ';
+const windows = (rim, hub, spokes, sw) => {
+let out = '';
+const sa = TAU / spokes;
+for (let k = 0; k < spokes; k++) {
+const a0 = k * sa, a1 = a0 + sa;
+const o0 = a0 + sw / 2 / rim, o1 = a1 - sw / 2 / rim, i0 = a0 + sw / 2 / hub, i1 = a1 - sw / 2 / hub;
+const bo = o1 - o0 > Math.PI ? 1 : 0, bi = i1 - i0 > Math.PI ? 1 : 0;
+out += 'M' + pt(o0, rim) + ' A' + rim.toFixed(2) + ' ' + rim.toFixed(2) + ' 0 ' + bo + ' 1 ' + pt(o1, rim) + ' L' + pt(i1, hub) + ' A' + hub.toFixed(2) + ' ' + hub.toFixed(2) + ' 0 ' + bi + ' 0 ' + pt(i0, hub) + ' Z ';
+}
+return out;
+};
+const gearD = (n, mod, spokes) => {
+const rp = n * mod / 2, ro = rp + mod, rr = rp - 1.25 * mod, st = TAU / n;
+let p = '';
+for (let i = 0; i < n; i++) {
+const a = i * st;
+p += (i ? 'L' : 'M') + pt(a, rr) + ' L' + pt(a + 0.14 * st, ro) + ' L' + pt(a + 0.36 * st, ro) + ' L' + pt(a + 0.5 * st, rr) + ' ';
+}
+p += 'Z ';
+const rim = rr - Math.max(3, mod * 1.4), hub = Math.max(5, rp * 0.24);
+if (spokes && rim - hub > 6) p += windows(rim, hub, spokes, Math.max(2.5, rp * 0.1));
+return { d: p + circ(Math.max(1.5, mod * 0.7)), ro };
+};
+const wheelD = (R, rimW, spokes) => ({ d: circ(R) + windows(R - rimW, Math.max(4, R * 0.14), spokes, Math.max(2.5, R * 0.08)) + circ(1.6), ro: R });
+const spiral = (r0, r1, turns) => {
+let p = '';
+const steps = turns * 36;
+for (let i = 0; i <= steps; i++) {
+const t = i / steps;
+p += (i ? 'L' : 'M') + pt(t * turns * TAU, r0 + (r1 - r0) * t) + ' ';
+}
+return p;
+};
+const paused = animate ? '' : ';animation-play-state:paused';
+const spin = (n, dir, base) => 'animation:' + (dir > 0 ? 'wfspin' : 'wfspinr') + ' ' + (base * n / 48).toFixed(2) + 's linear infinite' + paused;
+const swing = (sec) => 'animation:wfbal ' + sec + 's ease-in-out infinite' + paused;
+const item = (x, y, shape, cls, anim, phase, shadow, d2) => {
+const sz = Math.ceil(shape.ro * 2 + 2), hf = sz / 2;
+return {
+d: shape.d, d2: d2 || '', cls: 'wf ' + cls,
+vb: (-hf) + ' ' + (-hf) + ' ' + sz + ' ' + sz,
+outer: 'position:absolute;left:' + (x - hf).toFixed(1) + 'px;top:' + (y - hf).toFixed(1) + 'px;width:' + sz + 'px;height:' + sz + 'px;filter:' + shadow,
+anim: 'width:100%;height:100%;' + anim,
+phase: 'width:100%;height:100%;transform:rotate(' + phase.toFixed(2) + 'deg)'
+};
+};
+const mesh = (g, n2, mod, ang) => {
+const dist = (g.n + n2) * mod / 2, phi = ang * Math.PI / 180;
+const s1 = 360 / g.n, s2 = 360 / n2;
+const f = ((((ang - g.phase - 0.25 * s1) % s1) + s1) % s1) / s1;
+return { x: g.x + dist * Math.sin(phi), y: g.y - dist * Math.cos(phi), n: n2, phase: ang + 180 - 0.75 * s2 + f * s2 };
+};
+const bridge = (x1, y1, x2, y2, hh) => {
+const L = Math.hypot(x2 - x1, y2 - y1), ux = (x2 - x1) / L, uy = (y2 - y1) / L;
+const sx = x1 - ux * hh / 2, sy = y1 - uy * hh / 2, a = Math.atan2(uy, ux) * 180 / Math.PI;
+return { style: 'position:absolute;left:' + sx.toFixed(1) + 'px;top:' + (sy - hh / 2).toFixed(1) + 'px;width:' + (L + hh).toFixed(1) + 'px;height:' + hh + 'px;border-radius:' + (hh / 2) + 'px;transform-origin:0 50%;transform:rotate(' + a.toFixed(2) + 'deg);background:linear-gradient(180deg,#36363c 0%,#151517 45%,#050506 100%);box-shadow:0 10px 12px rgba(0,0,0,0.85),inset 0 1px 0 rgba(255,255,255,0.22),inset 0 -1px 0 rgba(0,0,0,0.9)' };
+};
+const jewel = (x, y) => ({ style: 'position:absolute;left:' + (x - 4.5).toFixed(1) + 'px;top:' + (y - 4.5).toFixed(1) + 'px;width:9px;height:9px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#ffffff 0,#ffffff 10%,' + accent + ' 45%,#3a1204 100%);box-shadow:0 0 0 2.2px #9a9aa0,0 0 0 3px #2a2a2e,0 3px 4px rgba(0,0,0,0.9)' });
+
+const DEEP = 'drop-shadow(0 3px 3px rgba(0,0,0,0.9)) brightness(0.6) blur(0.5px)';
+const MID = 'drop-shadow(0 8px 6px rgba(0,0,0,0.9))';
+const HIGH = 'drop-shadow(0 12px 8px rgba(0,0,0,0.85))';
+
+const center = { x: 225, y: 225, n: 48, phase: 0 };
+const g2 = mesh(center, 24, 3, 50);
+const g3 = mesh(center, 30, 3, 230);
+const g4 = mesh(g2, 16, 3, 130);
+const barrel = { x: 140, y: 140 };
+const esc = { x: 238, y: 330 };
+const bal = { x: 308, y: 312 };
+
+const wheels = [
+item(barrel.x, barrel.y, gearD(48, 2.4, 6), 'dark', spin(96, -1, 60), 0, DEEP, spiral(8, 40, 9)),
+item(center.x, center.y, gearD(48, 3, 5), '', spin(48, 1, 60), center.phase, MID),
+item(g2.x, g2.y, gearD(24, 3, 4), '', spin(24, -1, 60), g2.phase, MID),
+item(g3.x, g3.y, gearD(30, 3, 5), '', spin(30, -1, 60), g3.phase, MID),
+item(g4.x, g4.y, gearD(16, 3, 3), '', spin(16, 1, 60), g4.phase, MID),
+item(esc.x, esc.y, gearD(15, 2.4, 3), 'acc', spin(15, 1, 24), 0, HIGH),
+item(bal.x, bal.y, wheelD(38, 3.5, 3), '', swing(0.9), 0, HIGH, spiral(4, 20, 7))
+];
+const bridges = [
+bridge(g3.x, g3.y, g2.x, g2.y, 14),
+bridge(bal.x, bal.y, 392, 392, 20),
+bridge(barrel.x, barrel.y, 55, 55, 24),
+bridge(barrel.x, barrel.y, 40, 190, 16),
+bridge(g4.x, g4.y, 430, 150, 12),
+bridge(esc.x, esc.y, 250, 440, 12)
+];
+const jewels = [barrel, g2, g3, g4, esc, bal].map((p) => jewel(p.x, p.y));
+
+const ticks = [];
+for (let i = 0; i < 60; i++) {
+if (i % 15 === 0) continue;
+const major = i % 5 === 0, w = major ? 4 : 2;
+ticks.push({
+outer: 'position:absolute;left:' + (225 - w / 2) + 'px;top:0;width:' + w + 'px;height:450px;transform:rotate(' + (i * 6) + 'deg)',
+inner: 'margin-top:6px;width:100%;height:' + (major ? 16 : 8) + 'px;border-radius:1px;background:#141416;box-shadow:0 -1px 0 rgba(255,255,255,' + (major ? '0.4' : '0.22') + '),0 3px 4px rgba(0,0,0,0.9)'
+});
+}
+
+return {
+accent, wheels, bridges, jewels, ticks,
+hourDeg: h * 30 + m * 0.5,
+minuteDeg: m * 6 + s * 0.1,
+secondDeg: s * 6
+};
+}
+}
+</script>
+</body>
+</html>

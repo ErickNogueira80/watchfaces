@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Fumaça grafite</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#bbb}a:hover{color:#fff}
+@keyframes rspin{to{transform:rotate(360deg)}}
+@keyframes rspinr{to{transform:rotate(-360deg)}}
+@media (prefers-reduced-motion: reduce){.ra{animation:none !important}}
+</style>
+<style>html,body{margin:0;background:#161618;overflow:hidden}</style>
+</head>
+<body>
+<template id="dc-tpl">
+
+<div style="width: 520px; height: 520px; background: #161618; display: flex; align-items: center; justify-content: center; font-family: 'Barlow', sans-serif">
+<div style="width: 482px; height: 482px; border-radius: 50%; padding: 16px; box-sizing: border-box; background: linear-gradient(145deg, #4a4b50 0%, #1b1b1e 45%, #0a0a0b 100%); box-shadow: 0 30px 60px rgba(0,0,0,0.65), inset 0 1px 0 rgba(255,255,255,0.18)">
+<div style="position: relative; width: 450px; height: 450px; border-radius: 50%; overflow: hidden; background: radial-gradient(circle at 50% 50%, #0a0a0b 0%, #000000 70%); isolation: isolate">
+
+<sc-for list="{{rings}}" as="r" hint-placeholder-count="13">
+<div class="ra" style="{{r.orbit}}"><div style="{{r.blur}}"><div class="ra" style="{{r.ring}}"></div></div></div>
+</sc-for>
+
+<div style="position: absolute; inset: 0; background: radial-gradient(circle at 50% 50%, rgba(0,0,0,0.6) 0, rgba(0,0,0,0.3) 110px, rgba(0,0,0,0) 160px)"></div>
+<div style="position: absolute; inset: 0; background: radial-gradient(ellipse 190px 120px at 50% 50%, rgba(110,110,116,0.38) 0, rgba(50,50,54,0.22) 55%, rgba(0,0,0,0) 100%)"></div>
+
+<div style="position: absolute; left: 0; top: 0; width: 450px; height: 450px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px">
+<div style="font-family: 'Bebas Neue', sans-serif; font-size: 150px; line-height: 0.9; letter-spacing: 1px; background: linear-gradient(180deg, #cdb27a 0%, #b0935a 38%, #8e7243 70%, #6a5330 100%); -webkit-background-clip: text; background-clip: text; color: transparent; filter: drop-shadow(0 -1px 0 rgba(255,232,186,0.28)) drop-shadow(0 3px 2px rgba(0,0,0,0.95)) drop-shadow(0 10px 8px rgba(0,0,0,0.95)) drop-shadow(0 20px 14px rgba(0,0,0,0.75))">{{time}}</div>
+<div style="font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: 5px; color: #9a8256; text-shadow: 0 2px 4px rgba(0,0,0,0.9)">{{dateLabel}}</div>
+</div>
+
+</div>
+</div>
+</div>
+</template>
+<script type="text/x-dc" id="dc-logic" data-props='{"animate":{"editor":"boolean","default":true},"liveTime":{"editor":"boolean","default":true},"$preview":{"width":520,"height":520}}'>
+class Component extends DCLogic {
+componentDidMount() {
+this.timer = setInterval(() => this.setState({ now: Date.now() }), 1000);
+}
+componentWillUnmount() {
+clearInterval(this.timer);
+}
+renderVals() {
+const animate = this.props.animate ?? true;
+const live = this.props.liveTime ?? true;
+const d = live ? new Date() : new Date(2026, 9, 4, 13, 49, 0);
+const pad = (v) => String(v).padStart(2, '0');
+const days = ['DOM', 'SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SÁB'];
+const paused = animate ? '' : ';animation-play-state:paused';
+// Fumaça ao fundo (larga e muito desfocada) e fios finos e nítidos na frente
+// [raio, espessura, dx, dy, cinza, alfa do rastro, alfa da cabeça, desfoque, giro (s), sentido, órbita (s), início]
+const spec = [
+[200, 60, -20, 12, 110, 0.45, 0.7, 22, 14, 1, 60, 0],
+[185, 54, 22, -16, 90, 0.4, 0.65, 20, 17, -1, 52, 120],
+[210, 48, 6, 26, 140, 0.35, 0.6, 18, 12, 1, 70, 240],
+[170, 64, -14, -22, 70, 0.5, 0.6, 24, 19, -1, 48, 60],
+[195, 40, 28, 6, 160, 0.35, 0.65, 16, 11, 1, 40, 180],
+[160, 50, 0, 18, 100, 0.4, 0.55, 20, 15, -1, 66, 300],
+[215, 44, -26, -4, 120, 0.3, 0.5, 26, 21, 1, 80, 30],
+[180, 36, 16, 20, 180, 0.3, 0.6, 14, 9, -1, 36, 210],
+[205, 2.5, -10, 6, 230, 0.25, 0.8, 0.4, 13, 1, 44, 90],
+[178, 2, 14, -10, 210, 0.2, 0.7, 0.4, 10, -1, 38, 270],
+[192, 1.5, 4, 16, 255, 0.2, 0.75, 0.3, 8, 1, 30, 330],
+[164, 2, -18, -8, 200, 0.2, 0.6, 0.4, 15, -1, 56, 200],
+[214, 1.5, 22, 0, 220, 0.18, 0.6, 0.3, 18, 1, 62, 140]
+];
+const rings = spec.map(([R, w, dx, dy, g0, a10, a20, b, sd, dir, od, a0]) => {
+const g = Math.round(g0 * 0.5), a1 = a10 * 0.75, a2 = a20 * 0.6;
+const e = Math.max(1, Math.min(6, w / 3));
+const mask = 'radial-gradient(circle at 50% 50%, transparent 0, transparent ' + (R - w - e) + 'px, #000 ' + (R - w) + 'px, #000 ' + (R - e) + 'px, transparent ' + R + 'px)';
+return {
+orbit: 'position:absolute;inset:0;mix-blend-mode:screen;animation:' + (dir > 0 ? 'rspinr' : 'rspin') + ' ' + od + 's linear infinite' + paused,
+blur: 'position:absolute;inset:0;filter:blur(' + b + 'px)',
+ring: 'position:absolute;left:' + (225 + dx - R) + 'px;top:' + (225 + dy - R) + 'px;width:' + 2 * R + 'px;height:' + 2 * R + 'px;border-radius:50%;background:conic-gradient(from ' + a0 + 'deg, rgba(255,255,255,0) 0deg, rgba(' + g + ',' + g + ',' + g + ',' + a1 + ') 200deg, rgba(' + Math.min(255, g + 60) + ',' + Math.min(255, g + 60) + ',' + Math.min(255, g + 60) + ',' + a2 + ') 320deg, rgba(255,255,255,0) 360deg);-webkit-mask:' + mask + ';mask:' + mask + ';animation:' + (dir > 0 ? 'rspin' : 'rspinr') + ' ' + sd + 's linear infinite' + paused
+};
+});
+return {
+rings,
+time: pad(d.getHours()) + ':' + pad(d.getMinutes()),
+dateLabel: days[d.getDay()] + ' ' + pad(d.getDate())
+};
+}
+}
+</script>
+<script src="../dc-mini.js"></script>
+</body>
+</html>
