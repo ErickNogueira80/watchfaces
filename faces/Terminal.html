@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Terminal retrô</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Barlow+Condensed:ital,wght@0,600;1,700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#bbb}a:hover{color:#fff}
+</style>
+<style>html,body{margin:0;background:#161618;overflow:hidden}</style>
+</head>
+<body>
+<template id="dc-tpl">
+
+<div style="width: 520px; height: 520px; background: #161618; display: flex; align-items: center; justify-content: center; font-family: 'Bebas Neue', sans-serif">
+<div style="position: relative; width: 450px; height: 450px; border-radius: 50%; overflow: hidden; background: radial-gradient(circle at 35% 25%, #5e5a3e 0%, #3a3726 45%, #1c1b12 100%); box-shadow: 0 30px 60px rgba(0,0,0,0.65), inset 0 0 0 6px #121209, inset 0 0 0 8px rgba(255,240,190,0.12)">
+
+<div style="position: absolute; inset: 0; background: repeating-radial-gradient(circle at 70% 80%, rgba(0,0,0,0) 0px, rgba(0,0,0,0.06) 2px, rgba(0,0,0,0) 5px); opacity: 0.8"></div>
+
+<div style="position: absolute; left: 118px; top: 26px; width: 214px; height: 46px; border-radius: 10px 10px 18px 18px; background: linear-gradient(180deg, #2a281b 0%, #17160e 100%); box-shadow: inset 0 1px 0 rgba(255,240,190,0.14), 0 4px 6px rgba(0,0,0,0.7); display: flex; align-items: center; justify-content: center">
+<span style="font-family: 'Barlow Condensed', sans-serif; font-style: italic; font-weight: 700; font-size: 24px; letter-spacing: 3px; color: #6f6a52; text-shadow: 0 -1px 0 rgba(0,0,0,0.9), 0 1px 0 rgba(255,240,190,0.18)">RETRO·TEC</span>
+</div>
+<div style="position: absolute; left: 138px; top: 386px; width: 174px; height: 40px; border-radius: 18px 18px 10px 10px; background: linear-gradient(180deg, #2a281b 0%, #17160e 100%); box-shadow: inset 0 1px 0 rgba(255,240,190,0.14), 0 -2px 6px rgba(0,0,0,0.6); display: flex; align-items: center; justify-content: center">
+<span style="font-family: 'Barlow Condensed', sans-serif; font-style: italic; font-weight: 700; font-size: 20px; letter-spacing: 4px; color: #6f6a52; text-shadow: 0 -1px 0 rgba(0,0,0,0.9), 0 1px 0 rgba(255,240,190,0.18)">MOD 77</span>
+</div>
+<sc-for list="{{rivets}}" as="r" hint-placeholder-count="6">
+<div style="{{r}}"></div>
+</sc-for>
+
+<div style="position: absolute; left: 388px; top: 178px; width: 30px; height: 74px; border-radius: 6px; background: repeating-linear-gradient(180deg, #4a4732 0px, #4a4732 3px, #1d1c12 3px, #1d1c12 6px); box-shadow: inset 0 0 0 2px #121209, 0 4px 6px rgba(0,0,0,0.7)"></div>
+<div style="position: absolute; left: 384px; top: 196px; width: 38px; height: 7px; border-radius: 2px; background: linear-gradient(180deg, #b9b4a0 0%, #6d6a5a 100%); box-shadow: 0 2px 3px rgba(0,0,0,0.8)"></div>
+<div style="position: absolute; left: 394px; top: 266px; width: 18px; height: 40px; border-radius: 9px; background: #121209; box-shadow: inset 0 0 0 2px #2a281b">
+<div style="position: absolute; left: 5px; top: 6px; width: 8px; height: 28px; border-radius: 4px; background: {{glow}}; box-shadow: 0 0 8px {{glow}}"></div>
+</div>
+
+<div style="position: absolute; left: 56px; top: 78px; width: 322px; height: 300px; border-radius: 28px; background: #0c0b06; box-shadow: 0 0 0 5px #121209, 0 0 0 7px rgba(255,240,190,0.1), inset 0 0 24px rgba(0,0,0,0.9)"></div>
+<div style="{{screenStyle}}">
+
+<div style="position: absolute; left: 22px; top: 14px; display: flex; align-items: center; gap: 8px; font-size: 32px; line-height: 1">
+<svg width="26" height="20" viewBox="0 0 26 20" aria-hidden="true"><path d="M2 14c3 0 5-2 7-6l2-5 4 3c2 1.5 4 2 7 2.5 2 .3 3 1.5 3 3.5v2H5c-2 0-3-.5-3-2z" style="fill: {{fg}}"></path></svg>
+<span>{{steps}}</span>
+</div>
+<div style="position: absolute; right: 22px; top: 14px; display: flex; align-items: center; gap: 8px; font-size: 32px; line-height: 1">
+<span>{{bpm}}</span>
+<svg width="22" height="20" viewBox="0 0 24 22" aria-hidden="true"><path d="M12 21S2 14.6 2 7.5A5 5 0 0 1 12 5a5 5 0 0 1 10 2.5C22 14.6 12 21 12 21z" style="fill: {{fg}}"></path></svg>
+</div>
+<div style="position: absolute; left: 22px; top: 54px; width: 278px; height: 10px; box-sizing: border-box; border: 2.5px solid {{fg}}; border-bottom: none"></div>
+
+<div style="position: absolute; left: 12px; top: 104px; width: 58px; height: 40px; background: {{fg}}; color: {{bg}}; display: flex; align-items: center; justify-content: center; font-size: 32px; line-height: 1">{{dow}}</div>
+<div style="position: absolute; left: 12px; top: 152px; width: 58px; text-align: center; font-size: 44px; line-height: 1">{{day}}</div>
+<div style="position: absolute; left: 26px; top: 198px; width: 30px; height: 6px; background: {{fg}}"></div>
+
+<div style="position: absolute; left: 80px; top: 58px; font-size: 104px; line-height: 0.82; letter-spacing: 2px">{{hh}}</div>
+<div style="position: absolute; left: 80px; top: 142px; font-size: 104px; line-height: 0.82; letter-spacing: 2px">{{mm}}</div>
+<div style="position: absolute; left: 172px; top: 212px; width: 32px; text-align: center; font-size: 26px; line-height: 1">{{ss}}</div>
+<div style="position: absolute; left: 173px; top: 238px; width: 30px; height: 5px; background: {{fg}}"></div>
+
+<svg viewBox="0 0 140 230" width="114" height="187" style="position: absolute; left: 196px; top: 62px" role="img" aria-label="Mascote acenando">
+<g style="stroke-linecap: round; stroke-linejoin: round">
+<path d="M60 116 L57 168 L56 198 M80 116 L84 168 L86 198" style="fill: none; stroke: {{bg}}; stroke-width: 18"></path>
+<path d="M60 116 L57 168 L56 198 M80 116 L84 168 L86 198" style="fill: none; stroke: {{fg}}; stroke-width: 13"></path>
+<path d="M58 168 L66 168 M82 168 L90 168" style="fill: none; stroke: {{bg}}; stroke-width: 2"></path>
+<ellipse cx="51" cy="204" rx="12" ry="7" style="fill: {{fg}}; stroke: {{bg}}; stroke-width: 2.5"></ellipse>
+<ellipse cx="91" cy="204" rx="12" ry="7" style="fill: {{fg}}; stroke: {{bg}}; stroke-width: 2.5"></ellipse>
+<path d="M50 74 L36 96 L48 110" style="fill: none; stroke: {{bg}}; stroke-width: 15"></path>
+<path d="M50 74 L36 96 L48 110" style="fill: none; stroke: {{fg}}; stroke-width: 10"></path>
+<path d="M50 70 Q70 64 90 70 L94 112 Q70 119 46 112 Z" style="fill: {{fg}}; stroke: {{bg}}; stroke-width: 2.5"></path>
+<path d="M60 69 L70 82 L80 69 M70 82 L70 108 M54 90 L62 90" style="fill: none; stroke: {{bg}}; stroke-width: 2"></path>
+<path d="M85 84 l2 4.4 4.8.6-3.5 3.3.9 4.7-4.2-2.3-4.2 2.3.9-4.7-3.5-3.3 4.8-.6z" style="fill: {{bg}}"></path>
+<rect x="46" y="106" width="48" height="8" rx="1.5" style="fill: {{fg}}; stroke: {{bg}}; stroke-width: 2.5"></rect>
+<rect x="65" y="105" width="10" height="10" rx="1.5" style="fill: {{fg}}; stroke: {{bg}}; stroke-width: 2.5"></rect>
+<path d="M90 74 L106 62 L112 40" style="fill: none; stroke: {{bg}}; stroke-width: 15"></path>
+<path d="M90 74 L106 62 L112 40" style="fill: none; stroke: {{fg}}; stroke-width: 10"></path>
+<circle cx="113" cy="32" r="7.5" style="fill: {{fg}}; stroke: {{bg}}; stroke-width: 2.5"></circle>
+<path d="M108 27 L106 20 M112 25 L112 17 M116 26 L119 19 M119 31 L125 29" style="fill: none; stroke: {{bg}}; stroke-width: 5.5"></path>
+<path d="M108 27 L106 20 M112 25 L112 17 M116 26 L119 19 M119 31 L125 29" style="fill: none; stroke: {{fg}}; stroke-width: 3"></path>
+<rect x="65" y="58" width="10" height="11" style="fill: {{fg}}; stroke: {{bg}}; stroke-width: 2.5"></rect>
+<ellipse cx="70" cy="40" rx="19" ry="22" style="fill: {{fg}}; stroke: {{bg}}; stroke-width: 2.5"></ellipse>
+<path d="M47 46 C44 19 58 10 71 10 C87 10 97 21 95 46 C95 55 92 60 87 62 L87 41 C81 32 64 29 55 37 L54 62 C49 60 47 54 47 46 Z" style="fill: {{fg}}; stroke: {{bg}}; stroke-width: 2.5"></path>
+<path d="M58 22 C64 17 74 16 82 20" style="fill: none; stroke: {{bg}}; stroke-width: 2"></path>
+<ellipse cx="63" cy="43" rx="2.4" ry="3" style="fill: {{bg}}"></ellipse>
+<path d="M73 43 Q77.5 39.5 82 43" style="fill: none; stroke: {{bg}}; stroke-width: 2.2"></path>
+<path d="M61 51 Q70 58 79 50" style="fill: none; stroke: {{bg}}; stroke-width: 2.2"></path>
+</g>
+</svg>
+
+<div style="position: absolute; left: 300px; top: 140px; width: 8px; height: 34px; background: {{fg}}"></div>
+
+<div style="position: absolute; left: 22px; top: 252px; width: 74px; height: 32px; background: {{dimBg}}; display: flex; align-items: center; justify-content: center; gap: 4px; font-size: 26px; line-height: 1">
+<svg width="12" height="18" viewBox="0 0 12 18" aria-hidden="true"><path d="M7 0 L0 10 H5 L4 18 L12 7 H7 Z" style="fill: {{fg}}"></path></svg>PWR
+</div>
+<div style="position: absolute; left: 102px; top: 252px; width: 198px; height: 32px; background: {{dimBg}}; display: flex; align-items: center; gap: 10px; padding: 0px 10px; box-sizing: border-box">
+<div style="position: relative; width: 104px; height: 16px; box-sizing: border-box; border: 2.5px solid {{fg}}">
+<div style="position: absolute; left: 1.5px; top: 1.5px; bottom: 1.5px; width: {{battW}}; background: {{fg}}"></div>
+</div>
+<span style="font-size: 26px; line-height: 1; margin-left: auto">{{battery}}/100</span>
+</div>
+
+<div style="position: absolute; inset: 0; border-radius: 26px; background: repeating-linear-gradient(180deg, rgba(0,0,0,0) 0px, rgba(0,0,0,0) 2px, rgba(0,0,0,0.28) 2px, rgba(0,0,0,0.28) 4px); pointer-events: none"></div>
+<div style="position: absolute; inset: 0; border-radius: 26px; background: radial-gradient(ellipse at 50% 45%, rgba(0,0,0,0) 55%, rgba(0,0,0,0.55) 100%); pointer-events: none"></div>
+</div>
+
+</div>
+</div>
+</template>
+<script type="text/x-dc" id="dc-logic" data-props='{"phosphor":{"editor":"enum","options":["âmbar","verde"],"default":"âmbar"},"liveTime":{"editor":"boolean","default":true},"$preview":{"width":520,"height":520}}'>
+class Component extends DCLogic {
+componentDidMount() {
+this.timer = setInterval(() => this.setState({ now: Date.now() }), 1000);
+}
+componentWillUnmount() {
+clearInterval(this.timer);
+}
+renderVals() {
+const green = (this.props.phosphor ?? 'âmbar') === 'verde';
+const fg = green ? '#7dff9a' : '#f2b440';
+const bg = green ? '#04140a' : '#1a1205';
+const dimBg = green ? 'rgba(125,255,154,0.14)' : 'rgba(242,180,64,0.15)';
+const live = this.props.liveTime ?? true;
+const d = live ? new Date() : new Date(2026, 9, 17, 10, 8, 23);
+const pad = (v) => String(v).padStart(2, '0');
+const days = ['DOM', 'SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SÁB'];
+const rivet = (x, y) => 'position:absolute;left:' + (x - 6) + 'px;top:' + (y - 6) + 'px;width:12px;height:12px;border-radius:50%;background:radial-gradient(circle at 35% 30%, #a39e86 0%, #4e4b37 55%, #1a1910 100%);box-shadow:0 2px 3px rgba(0,0,0,0.8)';
+const battery = 89;
+return {
+fg, bg, dimBg,
+glow: fg,
+screenStyle: 'position:absolute;left:56px;top:78px;width:322px;height:300px;border-radius:28px;overflow:hidden;color:' + fg + ';background:radial-gradient(ellipse at 45% 40%, ' + (green ? '#0d2a16' : '#3a2a0c') + ' 0%, ' + bg + ' 75%);text-shadow:0 0 8px ' + fg + '66',
+rivets: [rivet(132, 49), rivet(318, 49), rivet(152, 406), rivet(298, 406), rivet(40, 225), rivet(372, 120)],
+steps: 5623, bpm: 72, battery, battW: 'calc(' + battery + '% - 3px)',
+dow: days[d.getDay()], day: pad(d.getDate()),
+hh: pad(d.getHours()), mm: pad(d.getMinutes()), ss: pad(d.getSeconds())
+};
+}
+}
+</script>
+<script src="../dc-mini.js"></script>
+</body>
+</html>
