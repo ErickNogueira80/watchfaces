@@ -15,7 +15,10 @@ const NO_RELOGIO = {
   'AneisPrata.dc.html': 'Halo',
   'AneisFumaca.dc.html': 'Fumaça',
   'AneisTunel.dc.html': 'Túnel',
-  'Treino.dc.html': 'Treino'
+  'Treino.dc.html': 'Treino',
+  'Discos.dc.html': 'Discos',
+  'DiscosBranco.dc.html': 'Discos Branco',
+  'Lanterna.dc.html': 'Lanterna'
 };
 
 // Desenhos que ficam só no canvas privado, nunca na galeria pública (ex.: usam arte de terceiros)
