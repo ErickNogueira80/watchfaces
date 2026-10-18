@@ -18,6 +18,9 @@ const NO_RELOGIO = {
   'Treino.dc.html': 'Treino'
 };
 
+// Desenhos que ficam só no canvas privado, nunca na galeria pública (ex.: usam arte de terceiros)
+const PRIVADOS = ['Terminal.dc.html'];
+
 const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const canvas = JSON.parse(fs.readFileSync(path.join(src, 'canvas.json'), 'utf8'));
 
@@ -50,7 +53,8 @@ ${helmet.trim()}
 // Grupos: cada artboard fica sob o título de grupo (nota "title1") mais próximo acima dele
 const titles = Object.values(canvas.notes || {}).filter((n) => n.kind === 'title1').sort((a, b) => a.y - b.y);
 const groups = titles.map((t) => ({ title: t.text, y: t.y, items: [] }));
-const boards = canvas.order.map((f) => ({ file: f, ...canvas.boards[f] }));
+const boards = canvas.order.filter((f) => !PRIVADOS.includes(f)).map((f) => ({ file: f, ...canvas.boards[f] }));
+for (const f of PRIVADOS) for (const p of [path.join(src, f), path.join(outFaces, f.replace('.dc.html', '.html'))]) if (fs.existsSync(p)) fs.unlinkSync(p);
 for (const b of boards) {
   convert(b.file);
   let g = groups[0];
